@@ -9,6 +9,8 @@ package thread;
  * 1. 需要将 堆区的数据拷贝一份到自己的本地内存  获取到count不是最新的。就存在脏读。
  * 2. 将改数据加1
  * 3. 将更新的数据刷新到共享内存（堆区中）
+ *
+ * 1000个线程执行完计数后输出：985 977
  */
 public class CountAddThread {
 
@@ -27,5 +29,12 @@ public class CountAddThread {
                 count++;
             }).start();
         }
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("1000个线程执行完计数后输出："+count);
     }
 }
